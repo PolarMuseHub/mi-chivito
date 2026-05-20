@@ -1,0 +1,16 @@
+FEATURES.md — Mi Chivito
+Generado por Arqueología · Abril 2026
+Siempre consultar este archivo antes de construir algo nuevo.
+
+Features Completas ✅
+#FeatureDescripciónArchivos claveTablas Supabase1AuthLogin/signup con email+password. AuthWrapper protege toda la app.AuthWrapper.tsx, LoginScreen.tsxauth.users, profiles2OnboardingFlujo de bienvenida: intro → preguntas de perfil → personalización del Chivito → meta inicialOnboardingFlow.tsx, onboarding/ folder, utils/onboarding.tsuser_profiles3Balance DisplayResumen visual de ingresos, gastos, deudas y ahorros del mesBalanceDisplay.tsx, FinanceContext.tsxSolo localStorage4Agregar TransacciónFormulario completo con tipo, monto, categoría, subcategoría, frecuencia, recurrenciaAddTransactionForm.tsx, utils/categories.tsSolo localStorage5Lista de TransaccionesHistorial con scroll, por tipoTransactionList.tsx, TransactionItem.tsxSolo localStorage6Categorías7 categorías principales y 91 subcategorías con tipo (Esencial/Deseo/Obligatorio/Variable)utils/categories.tsexpense_categories, expense_subcategories7Transacciones RecurrentesProcesamiento automático de gastos recurrentes (semanal/quincenal/mensual)utils/recurringTransactions.tsSolo localStorage8Metas FinancierasCRUD de metas con tipo, monto objetivo, fecha, progresoFinancialGoalForm.tsx, GoalDisplay.tsx, utils/goals.tsfinancial_goals9Streak TrackingRacha de días consecutivos de uso. Toast de motivación al incrementar.StreakCounter.tsx, utils/streakLogic.tsuser_streaks, streak_events10Chivito DisplayMascota animada con nombre personalizadoChivitoDisplay.tsxuser_profiles11AI Finance AnalyticsAnálisis IA del gasto con Edge FunctionAIFinanceAnalytics.tsxEdge: ai-finance-analytics12Ticket ScannerOCR de tickets con Gemini (→ migrar a GCP Document AI)TicketScanner.tsxEdge: scan-ticket13Suscripción + StripeTrial 30 días, checkout con Stripe. Paywall actualmente deshabilitado (everyone = premium).SubscriptionContext.tsx, SubscriptionGate.tsx, SubscriptionBanner.tsxsubscriptions, Edge: create-checkout-session, stripe-webhook14Eliminar CuentaModal de confirmación + Edge Function que borra todos los datosDeleteAccountModal.tsxEdge: delete-user-account15Reset de ContraseñaFlujo completo de recuperación por emailResetPasswordPage.tsx, PASSWORD_RESET_FIX.mdauth.users16Privacy Policy + ToSPáginas estáticas con routing propioPrivacyPolicy.tsx, TermsAndConditions.tsx—17PWAManifest, Service Worker, iconos para iOS/Androidpublic/manifest.json, public/sw.js, vite.config.ts—18Analytics de UsoTracking de eventos con anonymous_idutils/analytics.tsusage_logs
+
+Feature Parcial ⚠️
+#FeatureEstadoQué falta19ChivoCoins (Gamificación)Lógica completa en GamificationContext.jsx pero solo en localStorage. Componentes UI existen (CoinDisplay, RewardModal, GamificationBar). GamificationProvider NO está en el árbol de App.tsx.1. Migrar coins de localStorage → tabla user_coins en Supabase. 2. Envolver App con GamificationProvider. 3. Llamar registerTransaction() desde addTransaction().
+
+Reglas para Features Nuevas
+
+Antes de construir algo, verificar que no existe aquí.
+Toda feature nueva debe usar el patrón canónico (ver CONVENTIONS.md).
+Toda feature nueva con persistencia debe usar Supabase, no localStorage.
+Actualizar este archivo al terminar cada sesión de desarrollo.

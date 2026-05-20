@@ -1,43 +1,143 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from './components/Header';
+import BalanceDisplay from './components/BalanceDisplay';
+import AddTransactionForm from './components/AddTransactionForm';
+import AIFinanceAnalytics from './components/AIFinanceAnalytics';
+import TransactionList from './components/TransactionList';
+import FinancialGoalForm from './components/FinancialGoalForm';
+import AuthWrapper from './components/AuthWrapper';
+import OnboardingFlow from './components/OnboardingFlow';
+import LoadingSpinner from './components/LoadingSpinner';
+import { FinanceProvider, useFinance } from './context/FinanceContext';
+import { trackEvent, EVENTS } from './utils/analytics';
+import { StreakCounter } from './components/StreakCounter';
+import { GoalDisplay } from './components/GoalDisplay';
+import { ChivitoDisplay } from './components/ChivitoDisplay';
+import { ToastContainer } from './components/Toast';
+import { getUserProfile, createUserProfile } from './utils/onboarding';
 
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
+const AppContent: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<string>('balance');
+  const [goalRefreshTrigger, setGoalRefreshTrigger] = useState(0);
+  const [onboardingCompleted, setOnboardingCompleted] = useState<boolean | null>(null);
+  const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+  const navigate = useNavigate();
+  const { streakData, toasts, removeToast, checkStreak } = useFinance();
 
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
+  useEffect(() => {
+    trackEvent(EVENTS.APP_LOADED);
+    checkStreak();
+    checkOnboardingStatus();
+  }, []);
 
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
+  const checkOnboardingStatus = async () => {
+    setCheckingOnboarding(true);
+    const profile = await getUserProfile();
 
-/* Theme variables */
-import './theme/variables.css';
+    if (!profile) {
+      const created = await createUserProfile();
+      if (created) {
+        setOnboardingCompleted(false);
+      }
+    } else {
+      setOnboardingCompleted(profile.onboarding_completed);
+    }
 
-setupIonicReact();
+    setCheckingOnboarding(false);
+  };
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+  const handleOnboardingComplete = () => {
+    setOnboardingCompleted(true);
+    setGoalRefreshTrigger(prev => prev + 1);
+  };
+
+  useEffect(() => {
+    if (activeSection === 'balance') {
+      setGoalRefreshTrigger(prev => prev + 1);
+    }
+  }, [activeSection]);
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'balance':
+        return <BalanceDisplay />;
+      case 'nuevo':
+        return <AddTransactionForm />;
+      case 'metas':
+        return <FinancialGoalForm onSuccess={() => setActiveSection('balance')} />;
+      case 'analytics':
+        return <AIFinanceAnalytics onNavigate={setActiveSection} />;
+      case 'info':
+        return <TransactionList />;
+      default:
+        return <BalanceDisplay />;
+    }
+  };
+
+  if (checkingOnboarding) {
+    return <LoadingSpinner />;
+  }
+
+  if (onboardingCompleted === false) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-cream-200">
+      <Header currentSection={activeSection} onSectionChange={setActiveSection} />
+
+      <main className="container mx-auto px-4 md:px-6 py-6 md:py-8 pb-24 md:pb-8">
+        <div className="max-w-5xl mx-auto space-y-6">
+          <ChivitoDisplay />
+          {!streakData.loading && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <StreakCounter
+                streak={streakData.currentStreak}
+                longestStreak={streakData.longestStreak}
+              />
+              <GoalDisplay
+                onNavigateToGoals={() => setActiveSection('metas')}
+                refreshTrigger={goalRefreshTrigger}
+              />
+            </div>
+          )}
+          {renderSection()}
+        </div>
+      </main>
+
+      <footer className="container mx-auto px-4 md:px-6 py-6 md:py-8 pb-24 md:pb-8 text-center text-sm text-gray-500">
+        <p className="mb-2">Mi Chivito © {new Date().getFullYear()} - Finanzas personales simplificadas</p>
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={() => navigate('/terms-and-conditions')}
+            className="text-sage-600 hover:underline font-medium"
+          >
+            Términos y Condiciones
+          </button>
+          <span className="text-gray-400">|</span>
+          <button
+            onClick={() => navigate('/privacy-policy')}
+            className="text-sage-600 hover:underline font-medium"
+          >
+            Aviso de Privacidad
+          </button>
+        </div>
+      </footer>
+
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <AuthWrapper>
+      <FinanceProvider>
+        <AppContent />
+      </FinanceProvider>
+    </AuthWrapper>
+  );
+}
 
 export default App;
