@@ -169,7 +169,7 @@ const PrivacyPolicy: React.FC = () => {
               <h2 className="text-xl font-bold text-[#728c6a] mb-3">6. Uso de Tecnologías de Rastreo (Cookies y SDKs)</h2>
               <p className="text-gray-700 leading-relaxed">
                 Le informamos que en nuestra aplicación utilizamos Software Development Kits (SDKs) y cookies de terceros
-                (como Google Analytics y Firebase) que permiten monitorear su comportamiento como usuario de internet para
+                (como Google Analytics, Firebase y Sentry) que permiten monitorear su comportamiento como usuario de internet para
                 brindarle un mejor servicio y experiencia de usuario al navegar en nuestra aplicación.
               </p>
             </section>
