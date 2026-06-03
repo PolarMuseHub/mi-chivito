@@ -279,10 +279,6 @@ const LoginScreen: React.FC = () => {
                     <>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
-                        100% gratis, sin tarjeta requerida
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
                         Datos protegidos con encriptación
                       </li>
                       <li className="flex items-center gap-2">
