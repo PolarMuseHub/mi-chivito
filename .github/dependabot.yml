@@ -1,0 +1,22 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # 1. Mantener actualizadas las dependencias de npm (React, Vite, Supabase, etc.)
+  - package-ecosystem: "npm"
+    # La ubicación de tu package.json es la raíz del proyecto
+    directory: "/"
+    schedule:
+      # Revisa por actualizaciones una vez a la semana (lunes)
+      interval: "weekly"
+      day: "monday"
+
+  # 2. Mantener actualizadas las GitHub Actions (si las usas para CI/CD)
+  - package-ecosystem: "github-actions"
+    # Revisa los workflows en todo el repositorio
+    directory: "/"
+    schedule:
+      interval: "weekly"

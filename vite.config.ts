@@ -140,6 +140,14 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
         runtimeCaching: [
           {
+            // Evita que el Service Worker intercepte las peticiones a Sentry
+            urlPattern: /^https:\/\/.*\.sentry\.io\/.*/i,
+            handler: 'NetworkOnly',
+            options: {
+              cacheName: 'sentry-cache',
+            }
+          },
+          {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
             options: {
