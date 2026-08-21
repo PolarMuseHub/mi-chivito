@@ -232,82 +232,86 @@ const BalanceDisplay: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <h2 className="text-3xl font-bold text-gray-800">Balance Actual</h2>
-          <p className="text-sm text-gray-500">Organiza tu lana, sin tanto rollo.</p>
+      <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-cream-200 space-y-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold font-['Fraunces'] text-ink">Balance Actual</h2>
+          <p className="text-sm text-body font-semibold">{getPeriodLabel()}</p>
         </div>
 
         <div className="flex items-baseline justify-between">
-          <p className={`text-5xl font-bold ${balance.total >= 0 ? 'text-gray-800' : 'text-coral-600'}`}>
+          <p className={`text-4xl font-bold font-['Fraunces'] ${balance.total >= 0 ? 'text-ink' : 'text-red-600'}`}>
             {formatCurrency(balance.total)}
           </p>
 
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value as TimeRange)}
-            className="px-4 py-2 rounded-lg border border-gray-300 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-sage-500"
+            className="px-3 py-2 rounded-lg border border-gray-300 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-sage-500"
           >
-            <option value="monthly">Meses</option>
-            <option value="daily">Diario</option>
+            <option value="monthly">Mes</option>
+            <option value="daily">Día</option>
             <option value="weekly">Semanal</option>
-            <option value="yearly">Anual</option>
+            <option value="yearly">Año</option>
             <option value="all">Todo</option>
           </select>
         </div>
 
-        <div className="grid grid-cols-4 gap-4">
-          <div className="bg-cream-100 p-4 rounded-lg">
-            <p className="text-sm text-gray-600 mb-1">Ingresos</p>
-            <p className="text-2xl font-bold text-gray-800">{formatCurrency(balance.ingresos)}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+            <p className="text-xs text-green-800 font-semibold mb-1">Ingresos</p>
+            <p className="text-lg font-bold text-green-900">{formatCurrency(balance.ingresos)}</p>
           </div>
 
-          <div className="bg-coral-50 p-4 rounded-lg">
-            <p className="text-sm text-coral-600 mb-1">Gastos</p>
-            <p className="text-2xl font-bold text-coral-600">{formatCurrency(balance.gastos)}</p>
+          <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+            <p className="text-xs text-red-800 font-semibold mb-1">Gastos</p>
+            <p className="text-lg font-bold text-red-900">{formatCurrency(balance.gastos)}</p>
           </div>
 
-          <div className="bg-cream-100 p-4 rounded-lg">
-            <p className="text-sm text-gray-600 mb-1">Deudas</p>
-            <p className="text-2xl font-bold text-gray-800">{formatCurrency(balance.deudas)}</p>
+          <div className="bg-amber-50 p-3 rounded-lg border border-amber-200">
+            <p className="text-xs text-amber-800 font-semibold mb-1">Deudas</p>
+            <p className="text-lg font-bold text-amber-900">{formatCurrency(balance.deudas)}</p>
           </div>
 
-          <div className="bg-cream-100 p-4 rounded-lg">
-            <p className="text-sm text-gray-600 mb-1">Ahorros</p>
-            <p className="text-2xl font-bold text-gray-800">{formatCurrency(balance.ahorros)}</p>
+          <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+            <p className="text-xs text-blue-800 font-semibold mb-1">Ahorros</p>
+            <p className="text-lg font-bold text-blue-900">{formatCurrency(balance.ahorros)}</p>
           </div>
         </div>
 
-        <div className="flex gap-2">
-          {(['ingresos', 'gastos', 'deudas', 'ahorros'] as TransactionType[]).map(type => (
-            <button
-              key={type}
-              onClick={() => {
-                setSelectedTypes(prev =>
-                  prev.includes(type)
-                    ? prev.filter(t => t !== type)
-                    : [...prev, type]
-                );
-              }}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedTypes.includes(type)
-                  ? 'bg-sage-500 text-white'
-                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-              }`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm" style={{ height: '400px' }}>
-          <Line
-            key={`${timeRange}-${selectedTypes.join('-')}`}
-            options={chartOptions}
-            data={getHistoricalData()}
-          />
-        </div>
       </div>
+
+      {/* Second card: Chart */}
+      <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 border border-cream-200 mt-6">
+        <div className="flex gap-2">
+        {(['ingresos', 'gastos', 'deudas', 'ahorros'] as TransactionType[]).map(type => (
+          <button
+            key={type}
+            onClick={() => {
+              setSelectedTypes(prev =>
+                prev.includes(type)
+                  ? prev.filter(t => t !== type)
+                  : [...prev, type]
+              );
+            }}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              selectedTypes.includes(type)
+                ? 'bg-orange-dark text-white shadow-sm'
+                : 'bg-cream-100 text-ink/60 hover:bg-cream-200'
+            }`}
+          >
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-4" style={{ height: '300px' }}>
+        <Line
+          key={`${timeRange}-${selectedTypes.join('-')}`}
+          options={chartOptions}
+          data={getHistoricalData()}
+        />
+      </div>
+    </div>
     </div>
   );
 };

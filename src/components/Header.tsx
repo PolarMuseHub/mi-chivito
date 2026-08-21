@@ -99,8 +99,8 @@ const Header: React.FC<HeaderProps> = ({ currentSection = 'balance', onSectionCh
                     onClick={() => onSectionChange?.(item.id)}
                     className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
                       isActive
-                        ? 'text-sage-600'
-                        : 'text-gray-500 hover:text-sage-500'
+                        ? 'text-orange-dark'
+                        : 'text-gray-500 hover:text-orange-600'
                     }`}
                   >
                     <Icon size={20} />
@@ -212,8 +212,8 @@ const Header: React.FC<HeaderProps> = ({ currentSection = 'balance', onSectionCh
                 onClick={() => onSectionChange?.(item.id)}
                 className={`flex flex-col items-center justify-center py-3 px-2 transition-colors ${
                   isActive
-                    ? 'text-sage-600 bg-sage-50'
-                    : 'text-gray-500 hover:text-sage-500 hover:bg-gray-50'
+                    ? 'text-orange-dark'
+                    : 'text-gray-500 hover:text-orange-600'
                 }`}
               >
                 <Icon size={22} />

@@ -69,7 +69,7 @@ const AppContent: React.FC = () => {
       case 'analytics':
         return <AIFinanceAnalytics onNavigate={setActiveSection} />;
       case 'info':
-        return <TransactionList />;
+        return <TransactionList onNavigate={setActiveSection} />;
       default:
         return <BalanceDisplay />;
     }
@@ -84,7 +84,7 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cream-200">
+    <div className="min-h-screen bg-white">
       <Header currentSection={activeSection} onSectionChange={setActiveSection} />
 
       <main className="container mx-auto px-4 md:px-6 py-6 md:py-8 pb-24 md:pb-8">

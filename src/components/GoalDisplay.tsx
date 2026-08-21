@@ -42,8 +42,8 @@ export const GoalDisplay: React.FC<GoalDisplayProps> = ({ onNavigateToGoals, ref
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-lg shadow-sm p-6 border-2 border-gray-100 animate-pulse">
-        <div className="h-16 bg-gray-200 rounded"></div>
+      <div className="bg-white rounded-2xl shadow-sm p-4 border border-orange-dark/20 animate-pulse">
+        <div className="h-16 bg-gray-200 rounded-lg"></div>
       </div>
     );
   }
@@ -52,18 +52,18 @@ export const GoalDisplay: React.FC<GoalDisplayProps> = ({ onNavigateToGoals, ref
     return (
       <button
         onClick={onNavigateToGoals}
-        className="bg-white rounded-lg shadow-sm p-6 border border-cream-200 hover:border-coral-500 hover:shadow-md transition-all w-full text-left group"
+        className="bg-white rounded-2xl shadow-sm p-4 border border-orange-dark/20 hover:border-orange-dark/50 hover:shadow-md transition-all w-full text-left group"
       >
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-cream-100 rounded-full flex items-center justify-center group-hover:bg-cream-200 transition-colors">
-            <Target size={24} className="text-sage-600" />
+          <div className="w-12 h-12 bg-cream-100 rounded-full flex items-center justify-center group-hover:bg-orange-dark/10 transition-colors">
+            <Target size={24} className="text-orange-dark" />
           </div>
           <div>
-            <p className="text-lg font-semibold text-sage-600 group-hover:text-sage-700 transition-colors">
+            <p className="text-base font-bold text-ink group-hover:text-orange-dark transition-colors">
               Crea tu meta
             </p>
-            <p className="text-sm text-sage-500">
-              Dale algo que proteger a tu Chivito
+            <p className="text-sm text-body">
+              Dale a tu Chivito algo que proteger
             </p>
           </div>
         </div>
@@ -72,23 +72,23 @@ export const GoalDisplay: React.FC<GoalDisplayProps> = ({ onNavigateToGoals, ref
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-cream-200">
+    <div className="bg-white rounded-2xl shadow-sm p-4 border border-orange-dark/20">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="text-4xl">
+          <div className="text-3xl flex-shrink-0">
             {getGoalIcon(activeGoal.goal_type)}
           </div>
           <div>
-            <h3 className="text-lg font-bold text-sage-900">
+            <h3 className="text-base font-bold font-['Fraunces'] text-ink">
               {activeGoal.goal_name}
             </h3>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-2xl font-bold text-sage-600">
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg font-bold text-ink">
                 {formatCurrency(activeGoal.target_amount)}
               </span>
             </div>
-            <p className="text-sm text-sage-500 mt-1">
-              Creada el {formatDate(activeGoal.created_at)}
+            <p className="text-xs text-body mt-0.5">
+              Meta creada el {formatDate(activeGoal.created_at)}
             </p>
           </div>
         </div>

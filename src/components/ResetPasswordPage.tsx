@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, ArrowLeft, Mail, ArrowRight, Check, Shield } from 'lucide-react';
+import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, ArrowLeft, Mail, ArrowRight, Check } from 'lucide-react';
 import { supabase } from '../utils/supabase';
 
 const ResetPasswordPage: React.FC = () => {
@@ -148,20 +148,16 @@ const ResetPasswordPage: React.FC = () => {
   // Loading state while checking token
   if (isValidToken === null) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md text-center border border-[#bed4cf]/20">
-          <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-lg" style={{ backgroundColor: '#f4a258' }}>
+      <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+        <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md p-7 text-center">
+          <div className="mx-auto w-[76px] h-[76px] bg-white rounded-full flex items-center justify-center shadow-lg mb-4">
             <img
               src="/icons/android-chrome-192x192.png"
               alt="Mi Chivito Logo"
-              className="w-14 h-14 object-contain"
+              className="w-12 h-12 object-contain"
             />
           </div>
-          <div className="w-8 h-8 border-4 border-[#728c6a] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-8 h-8 border-4 border-orange border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-600 font-medium">Validando enlace...</p>
         </div>
       </div>
@@ -171,25 +167,21 @@ const ResetPasswordPage: React.FC = () => {
   // Success state
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md text-center border border-[#bed4cf]/20">
-          <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 shadow-lg">
-            <CheckCircle className="w-10 h-10 text-green-600" />
+      <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+        <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md p-7 text-center">
+          <div className="mx-auto w-[76px] h-[76px] bg-[#E8F3EC] rounded-full flex items-center justify-center mb-6">
+            <CheckCircle className="w-10 h-10 text-[#2E7D5B]" />
           </div>
 
-          <h1 className="text-3xl font-bold mb-4" style={{ color: '#728c6a' }}>
+          <h1 className="font-['Fraunces'] text-2xl font-bold text-[#241B14] mb-2">
             ¡Contraseña actualizada!
           </h1>
 
-          <p className="text-gray-600 mb-6 text-sm sm:text-base">
+          <p className="text-[#8A7F72] mb-6 text-sm leading-relaxed">
             Tu contraseña ha sido restablecida exitosamente. Serás redirigido a la página principal en unos segundos.
           </p>
 
-          <div className="w-8 h-8 border-4 border-[#728c6a] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-8 h-8 border-4 border-orange border-t-transparent rounded-full animate-spin mx-auto" />
         </div>
       </div>
     );
@@ -198,29 +190,25 @@ const ResetPasswordPage: React.FC = () => {
   // Request sent state
   if (requestSent) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md text-center border border-[#bed4cf]/20">
-          <div className="mx-auto w-20 h-20 bg-sage-100 rounded-full flex items-center justify-center mb-6 shadow-lg">
-            <CheckCircle className="w-10 h-10 text-sage-600" />
+      <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+        <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md p-7 text-center flex flex-col items-center pt-16">
+          <div className="w-[76px] h-[76px] bg-[#E8F3EC] rounded-full flex items-center justify-center mb-5">
+            <Mail className="w-9 h-9 text-[#2E7D5B]" />
           </div>
 
-          <h1 className="text-3xl font-bold mb-4" style={{ color: '#728c6a' }}>
-            ¡Correo enviado!
+          <h1 className="font-['Fraunces'] text-2xl font-bold text-[#241B14] mb-2">
+            Revisa tu correo
           </h1>
 
-          <p className="text-gray-600 mb-6 text-sm sm:text-base">
-            Hemos enviado un enlace de restablecimiento a <strong>{email}</strong>.
-            Revisa tu bandeja de entrada y haz clic en el enlace para continuar.
+          <p className="text-[#8A7F72] mb-6 text-sm leading-relaxed">
+            Enviamos un enlace para restablecer tu contraseña a <span className="font-extrabold text-[#241B14]">{email}</span>.
           </p>
+
+          <p className="text-xs text-[#8A7F72] font-semibold">¿No llegó? <a href="#" onClick={handleRequestReset} className="text-[#E2610F] font-extrabold no-underline hover:underline">Reenviar correo</a></p>
 
           <button
             onClick={() => navigate('/')}
-            className="w-full text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-            style={{ backgroundColor: '#728c6a' }}
+            className="mt-auto w-full bg-gray-100 text-gray-700 font-bold py-3 rounded-xl"
           >
             <ArrowLeft className="w-5 h-5" />
             Volver al inicio
@@ -233,43 +221,31 @@ const ResetPasswordPage: React.FC = () => {
   // Request reset form (when no valid token)
   if (showRequestForm) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-10 w-full max-w-md border border-[#bed4cf]/20">
-          <div className="text-center mb-8">
-            <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-lg" style={{ backgroundColor: '#f4a258' }}>
-              <img
-                src="/icons/android-chrome-192x192.png"
-                alt="Mi Chivito Logo"
-                className="w-14 h-14 object-contain"
-              />
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#728c6a' }}>
-              ¿Olvidaste tu contraseña?
-            </h1>
-
-            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-              Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña
-            </p>
+      <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+        <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md p-7">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF9552] to-[#E2610F] flex items-center justify-center shadow-lg shadow-orange/30 mb-5">
+            <Lock className="w-8 h-8 text-white" strokeWidth={2.2} />
           </div>
 
-          <form onSubmit={handleRequestReset} className="space-y-5">
+          <h1 className="font-['Fraunces'] text-[25px] font-bold text-[#241B14] mb-2">
+              ¿Olvidaste tu contraseña?
+          </h1>
+          <p className="text-sm text-[#8A7F72] font-medium leading-relaxed mb-7">
+            No hay problema. Escribe tu correo y te mandamos un enlace para crear una nueva.
+          </p>
+
+          <form onSubmit={handleRequestReset} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#728c6a' }}>
+              <label htmlFor="email" className="block text-xs font-bold mb-2 text-[#241B14]">
                 Correo Electrónico
               </label>
-              <div className="relative group">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#728c6a] w-5 h-5 transition-colors" />
+              <div className="input-wrap group">
+                <Mail className="text-[#B7AB9C] group-focus-within:text-[#FF7A2E] w-5 h-5 transition-colors" />
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#728c6a] focus:ring-4 focus:ring-[#728c6a]/10 transition-all bg-white"
                   placeholder="tu@correo.com"
                   required
                   disabled={isLoading}
@@ -279,7 +255,7 @@ const ResetPasswordPage: React.FC = () => {
             </div>
 
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex items-start gap-3 animate-shake">
+              <div className="bg-red-100 border border-red-300 rounded-xl p-3 flex items-start gap-3 animate-shake">
                 <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-red-700 font-medium">{error}</p>
               </div>
@@ -288,11 +264,7 @@ const ResetPasswordPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading || !email.trim()}
-              className="w-full disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-              style={{
-                backgroundColor: isLoading || !email.trim() ? '' : '#728c6a',
-                opacity: isLoading || !email.trim() ? 0.5 : 1
-              }}
+              className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-extrabold text-[15px] py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-b from-[#FF8A42] to-[#E2610F]"
             >
               {isLoading ? (
                 <>
@@ -301,8 +273,8 @@ const ResetPasswordPage: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <ArrowRight className="w-5 h-5" />
-                  Enviar enlace de restablecimiento
+                  Enviar enlace
+                  <ArrowRight className="w-5 h-5" strokeWidth={2.4} />
                 </>
               )}
             </button>
@@ -311,8 +283,7 @@ const ResetPasswordPage: React.FC = () => {
           <div className="mt-6 text-center">
             <button
               onClick={() => navigate('/')}
-              className="font-medium transition-all hover:underline"
-              style={{ color: '#728c6a' }}
+              className="font-bold text-sm text-[#E2610F] hover:underline transition-all"
               disabled={isLoading}
             >
               Volver al inicio de sesión
@@ -325,43 +296,35 @@ const ResetPasswordPage: React.FC = () => {
 
   // Password reset form (when valid token exists)
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-      <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-10 w-full max-w-md border border-[#bed4cf]/20">
-        <div className="text-center mb-8">
-          <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-lg" style={{ backgroundColor: '#f4a258' }}>
-            <img
-              src="/icons/android-chrome-192x192.png"
-              alt="Mi Chivito Logo"
-              className="w-14 h-14 object-contain"
-            />
-          </div>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+      <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md p-7">
+        <button onClick={() => setShowRequestForm(true)} className="w-9 h-9 rounded-full bg-[#FFF8F2] flex items-center justify-center text-[#241B14] mb-7 cursor-pointer">
+          <ArrowLeft className="w-4 h-4" />
+        </button>
 
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#728c6a' }}>
-            Restablecer contraseña
-          </h1>
-
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            Ingresa tu nueva contraseña para acceder a tu cuenta
-          </p>
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF9552] to-[#E2610F] flex items-center justify-center shadow-lg shadow-orange/30 mb-5">
+          <Lock className="w-8 h-8 text-white" strokeWidth={2.2} />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <h1 className="font-['Fraunces'] text-[25px] font-bold text-[#241B14] mb-2">
+            Restablecer contraseña
+        </h1>
+        <p className="text-sm text-[#8A7F72] font-medium leading-relaxed mb-7">
+            Ingresa tu nueva contraseña para acceder a tu cuenta
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="password" className="block text-sm font-semibold mb-2" style={{ color: '#728c6a' }}>
+            <label htmlFor="password" className="block text-xs font-bold mb-2 text-[#241B14]">
               Nueva contraseña
             </label>
-            <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#728c6a] w-5 h-5 transition-colors" />
+            <div className="input-wrap group relative">
+              <Lock className="text-[#B7AB9C] group-focus-within:text-[#FF7A2E] w-5 h-5 transition-colors" />
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-11 pr-12 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#728c6a] focus:ring-4 focus:ring-[#728c6a]/10 transition-all bg-white"
                 placeholder="Mínimo 8 caracteres"
                 required
                 minLength={8}
@@ -371,7 +334,7 @@ const ResetPasswordPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#728c6a] transition-colors p-1"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-orange transition-colors p-1"
                 disabled={isLoading}
                 tabIndex={-1}
                 aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
@@ -382,17 +345,16 @@ const ResetPasswordPage: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-semibold mb-2" style={{ color: '#728c6a' }}>
+            <label htmlFor="confirmPassword" className="block text-xs font-bold mb-2 text-[#241B14]">
               Confirmar contraseña
             </label>
-            <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#728c6a] w-5 h-5 transition-colors" />
+            <div className="input-wrap group relative">
+              <Lock className="text-[#B7AB9C] group-focus-within:text-[#FF7A2E] w-5 h-5 transition-colors" />
               <input
                 id="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-11 pr-12 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#728c6a] focus:ring-4 focus:ring-[#728c6a]/10 transition-all bg-white"
                 placeholder="Repite tu nueva contraseña"
                 required
                 minLength={8}
@@ -402,7 +364,7 @@ const ResetPasswordPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#728c6a] transition-colors p-1"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-orange transition-colors p-1"
                 disabled={isLoading}
                 tabIndex={-1}
                 aria-label={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
@@ -414,7 +376,7 @@ const ResetPasswordPage: React.FC = () => {
 
           {/* Password validation feedback */}
           {password && (
-            <div className="space-y-2">
+            <div className="space-y-1 pt-1">
               <div className={`flex items-center gap-2 text-sm ${
                 password.length >= 8 ? 'text-green-600' : 'text-gray-500'
               }`}>
@@ -423,7 +385,7 @@ const ResetPasswordPage: React.FC = () => {
                 ) : (
                   <div className="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
                 )}
-                <span className={password.length >= 8 ? 'font-medium' : ''}>
+                <span className={password.length >= 8 ? 'font-bold' : ''}>
                   Al menos 8 caracteres
                 </span>
               </div>
@@ -437,7 +399,7 @@ const ResetPasswordPage: React.FC = () => {
                   ) : (
                     <div className="w-4 h-4 border-2 border-red-300 rounded-full"></div>
                   )}
-                  <span className={password === confirmPassword ? 'font-medium' : ''}>
+                  <span className={password === confirmPassword ? 'font-bold' : ''}>
                     Las contraseñas coinciden
                   </span>
                 </div>
@@ -446,7 +408,7 @@ const ResetPasswordPage: React.FC = () => {
           )}
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex items-start gap-3 animate-shake">
+            <div className="bg-red-100 border border-red-300 rounded-xl p-3 flex items-start gap-3 animate-shake">
               <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-red-700 font-medium">{error}</p>
             </div>
@@ -455,11 +417,7 @@ const ResetPasswordPage: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading || !isFormValid}
-            className="w-full disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-            style={{
-              backgroundColor: isLoading || !isFormValid ? '' : '#728c6a',
-              opacity: isLoading || !isFormValid ? 0.5 : 1
-            }}
+            className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-extrabold text-[15px] py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-b from-[#FF8A42] to-[#E2610F]"
           >
             {isLoading ? (
               <>
@@ -474,23 +432,6 @@ const ResetPasswordPage: React.FC = () => {
             )}
           </button>
         </form>
-
-        <div className="mt-8 pt-6 border-t-2 border-gray-100">
-          <div className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl p-5">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm">
-                <Shield className="w-5 h-5 text-amber-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-amber-900 mb-1">Importante</h3>
-                <p className="text-sm text-amber-800 leading-relaxed">
-                  Debes establecer una nueva contraseña para continuar. Una vez actualizada,
-                  podrás acceder normalmente a tu cuenta con la nueva contraseña.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

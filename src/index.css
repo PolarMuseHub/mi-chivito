@@ -48,3 +48,39 @@
 .animate-fade-in {
   animation: fade-in 0.4s ease-out;
 }
+
+@layer base {
+  /*
+   Estilos base para los botones.
+   Esto sobreescribe el estilo por defecto de los navegadores.
+  */
+  button {
+    @apply font-sans; /* Asegura que usen la fuente del proyecto */
+  }
+
+  /*
+   Estilos base para los inputs.
+   Esto elimina los estilos por defecto y prepara el terreno.
+  */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  select {
+    @apply appearance-none bg-transparent border-none outline-none font-sans w-full;
+  }
+}
+
+@layer components {
+  /*
+    Clase .input-wrap para los contenedores de inputs.
+  */
+  .input-wrap {
+    @apply flex items-center gap-2.5 bg-[#FBF6F0] border-[1.5px] border-[#F1E4D7] rounded-2xl py-3 px-3.5 transition-colors;
+  }
+
+  .input-wrap:focus-within {
+    @apply border-orange bg-white ring-4 ring-orange-light;
+    /* El ring-4 y ring-orange-light simulan el box-shadow:0 0 0 4px var(--orange-light) */
+  }
+}

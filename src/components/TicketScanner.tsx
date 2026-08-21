@@ -101,7 +101,7 @@ const TicketScanner: React.FC<TicketScannerProps> = ({ onDataExtracted }) => {
         type="button"
         onClick={() => setShowPremiumModal(true)}
         disabled={loading}
-        className="w-full bg-sage-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-sage-600 disabled:bg-sage-300 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 shadow-sm relative"
+        className="w-full bg-black text-white font-bold py-3 px-6 rounded-2xl hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-3 relative shadow-md"
       >
         {loading ? (
           <>
@@ -112,7 +112,7 @@ const TicketScanner: React.FC<TicketScannerProps> = ({ onDataExtracted }) => {
           <>
             <Camera size={20} />
             <span>Escanear Ticket</span>
-            <span className="inline-flex items-center gap-1 bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full ml-1 uppercase tracking-wide">
+            <span className="inline-flex items-center gap-1 bg-orange-light text-orange-dark text-[10px] font-bold px-2 py-0.5 rounded-full ml-1 uppercase tracking-wide">
               <Sparkles size={10} />
               Premium
             </span>
@@ -150,7 +150,7 @@ const TicketScanner: React.FC<TicketScannerProps> = ({ onDataExtracted }) => {
               <button
                 type="button"
                 onClick={() => setShowPremiumModal(false)}
-                className="flex-1 py-2.5 px-4 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                className="flex-1 py-3 px-4 text-sm font-bold text-[#241B14] bg-[#FFF8F2] border border-[#F1E4D7] rounded-xl hover:bg-[#F5EBE1] transition-colors"
               >
                 Cancelar
               </button>
@@ -160,7 +160,7 @@ const TicketScanner: React.FC<TicketScannerProps> = ({ onDataExtracted }) => {
                   setShowPremiumModal(false);
                   fileInputRef.current?.click();
                 }}
-                className="flex-1 py-2.5 px-4 text-sm font-medium text-white bg-sage-500 rounded-lg hover:bg-sage-600 transition-colors"
+                className="flex-1 py-3 px-4 text-sm font-bold text-white bg-gradient-to-b from-[#FF8A42] to-[#E2610F] rounded-xl hover:opacity-95 shadow-md shadow-orange/20 transition-all"
               >
                 Continuar &rarr;
               </button>

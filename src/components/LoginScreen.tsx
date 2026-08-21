@@ -70,42 +70,37 @@ const LoginScreen: React.FC = () => {
   const isFormValid = email.trim() && password.trim() && password.length >= 6;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-[#f4a258]/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#728c6a]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-      <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-10 w-full max-w-md border border-[#bed4cf]/20">
-        <div className="text-center mb-8">
-          <div className="mx-auto w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-lg" style={{ backgroundColor: '#f4a258' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-[#EFE7DD]">
+      <div className="bg-white rounded-[44px] shadow-2xl w-full max-w-md overflow-hidden">
+        {/* Hero Section */}
+        <div className="hero-section relative text-center rounded-b-3xl px-7 pb-10 pt-2 bg-[radial-gradient(120%_100%_at_20%_0%,#FF9552_0%,#FF7A2E_45%,#E2610F_100%)]">
+          <div className="pt-[50px] relative z-10">
+            <div className="mx-auto w-[76px] h-[76px] bg-white rounded-full flex items-center justify-center shadow-lg mb-4">
             <img
               src="/icons/android-chrome-192x192.png"
               alt="Mi Chivito Logo"
-              className="w-14 h-14 object-contain"
+              className="w-12 h-12 object-contain"
             />
           </div>
-
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#728c6a' }}>
-            {mode === 'login' ? 'Bienvenido' : 'Únete a Mi Chivito'}
-          </h1>
-
-          <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-            {mode === 'login'
-              ? 'Ingresa para gestionar tus finanzas personales'
-              : 'Comienza tu viaje hacia la libertad financiera'
-            }
-          </p>
-        </div>
-
-        <div className="flex gap-2 mb-8 p-1 bg-gray-100 rounded-xl">
+            <h1 className="text-2xl font-bold text-white font-['Fraunces']">
+              {mode === 'login' ? 'Bienvenido' : 'Únete a Mi Chivito'}
+            </h1>
+            <p className="text-white/80 text-sm mt-1.5">
+              {mode === 'login'
+                ? 'Ingresa para gestionar tus finanzas personales'
+                : 'Comienza tu viaje hacia la libertad financiera'
+              }
+            </p>
+          </div>
+          {/* Toggle */}
+          <div className="relative z-10 flex gap-1 mt-5 p-1 bg-white/20 rounded-2xl">
           <button
             type="button"
             onClick={() => mode !== 'login' && toggleMode()}
-            className={`flex-1 py-2.5 px-4 rounded-lg font-medium transition-all duration-200 ${
+            className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-sm transition-all duration-300 ${
               mode === 'login'
-                ? 'bg-white text-[#728c6a] shadow-md'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-[#E2610F] shadow-md'
+                : 'text-white/80'
             }`}
             disabled={isLoading}
           >
@@ -114,10 +109,10 @@ const LoginScreen: React.FC = () => {
           <button
             type="button"
             onClick={() => mode !== 'signup' && toggleMode()}
-            className={`flex-1 py-2.5 px-4 rounded-lg font-medium transition-all duration-200 ${
+            className={`flex-1 py-2.5 px-4 rounded-xl font-bold text-sm transition-all duration-300 ${
               mode === 'signup'
-                ? 'bg-white text-[#728c6a] shadow-md'
-                : 'text-gray-600 hover:text-gray-900'
+                ? 'bg-white text-[#E2610F] shadow-md'
+                : 'text-white/80'
             }`}
             disabled={isLoading}
           >
@@ -125,19 +120,21 @@ const LoginScreen: React.FC = () => {
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        </div>
+        {/* Form Body */}
+        <div className="p-6 sm:p-7">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-semibold mb-2" style={{ color: '#728c6a' }}>
+            <label htmlFor="email" className="block text-xs font-bold mb-2 text-[#241B14]">
               Correo Electrónico
             </label>
-            <div className="relative group">
-              <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#728c6a] w-5 h-5 transition-colors" />
+            <div className="input-wrap group">
+              <Mail className="text-[#B7AB9C] group-focus-within:text-[#FF7A2E] w-5 h-5 transition-colors" />
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#728c6a] focus:ring-4 focus:ring-[#728c6a]/10 transition-all bg-white"
                 placeholder="tu@correo.com"
                 required
                 disabled={isLoading}
@@ -147,24 +144,23 @@ const LoginScreen: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-semibold mb-2" style={{ color: '#728c6a' }}>
+            <label htmlFor="password" className="block text-xs font-bold mb-2 text-[#241B14]">
               Contraseña
             </label>
-            <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-[#728c6a] w-5 h-5 transition-colors" />
+            <div className="input-wrap group relative">
+              <Lock className="text-[#B7AB9C] group-focus-within:text-[#FF7A2E] w-5 h-5 transition-colors" />
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-11 pr-12 py-3.5 border-2 border-gray-200 rounded-xl focus:border-[#728c6a] focus:ring-4 focus:ring-[#728c6a]/10 transition-all bg-white"
                 placeholder={mode === 'signup' ? 'Mínimo 6 caracteres' : 'Tu contraseña'}
                 required
                 minLength={6}
                 disabled={isLoading}
                 autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
               />
-              <button
+              <button // Botón para mostrar/ocultar contraseña
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#728c6a] transition-colors p-1"
@@ -177,12 +173,11 @@ const LoginScreen: React.FC = () => {
             </div>
 
             {mode === 'login' && (
-              <div className="mt-2 text-right">
+              <div className="mt-1 text-right">
                 <button
                   type="button"
                   onClick={handleForgotPassword}
-                  className="text-sm font-medium hover:underline transition-all"
-                  style={{ color: '#728c6a' }}
+                  className="text-xs font-bold text-[#E2610F] hover:underline transition-all"
                   disabled={isLoading}
                 >
                   ¿Olvidaste tu contraseña?
@@ -190,7 +185,7 @@ const LoginScreen: React.FC = () => {
               </div>
             )}
 
-            {mode === 'signup' && password.length > 0 && (
+            {mode === 'signup' && (
               <div className="mt-2 space-y-1">
                 <div className="flex items-center gap-2 text-xs">
                   {password.length >= 6 ? (
@@ -198,7 +193,7 @@ const LoginScreen: React.FC = () => {
                   ) : (
                     <div className="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
                   )}
-                  <span className={password.length >= 6 ? 'text-green-600 font-medium' : 'text-gray-500'}>
+                  <span className={password.length >= 6 ? 'text-green-600 font-bold' : 'text-gray-500'}>
                     Mínimo 6 caracteres
                   </span>
                 </div>
@@ -207,13 +202,13 @@ const LoginScreen: React.FC = () => {
           </div>
 
           {error && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 animate-shake">
+            <div className="bg-red-100 border border-red-300 rounded-xl p-3 animate-shake">
               <p className="text-sm text-red-700 font-medium">{error}</p>
             </div>
           )}
 
           {successMessage && (
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-4">
+            <div className="bg-green-100 border border-green-300 rounded-xl p-3">
               <p className="text-sm text-green-700 font-medium flex items-center gap-2">
                 <Check className="w-5 h-5" />
                 {successMessage}
@@ -224,11 +219,8 @@ const LoginScreen: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading || !isFormValid}
-            className="w-full disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
-            style={{
-              backgroundColor: isLoading || !isFormValid ? '' : '#728c6a',
-              opacity: isLoading || !isFormValid ? 0.5 : 1
-            }}
+            className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-[15px] py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-b from-[#FF8A42] to-[#E2610F]"
+            
           >
             {isLoading ? (
               <>
@@ -253,52 +245,50 @@ const LoginScreen: React.FC = () => {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t-2 border-gray-100">
-          <div className="bg-gradient-to-br from-[#728c6a]/5 to-[#bed4cf]/10 border-2 border-[#728c6a]/20 rounded-xl p-5">
-            <div className="flex items-start gap-3 mb-3">
-              <div className="p-2 bg-white rounded-lg shadow-sm">
-                <Shield className="w-5 h-5 text-[#728c6a]" />
+        <div className="mt-5">
+          <div className="bg-[#EAF5EF] border border-[#D9EBE1] rounded-2xl p-4">
+            <div className="flex items-center gap-2.5 mb-2.5">
+              <div className="p-2 bg-[#2E7D5B] rounded-lg shadow-sm">
+                <Shield className="w-4 h-4 text-white" />
               </div>
-              <div>
-                <h3 className="font-bold text-[#728c6a] mb-1">
-                  {mode === 'login' ? 'Acceso Seguro' : 'Protección Total'}
-                </h3>
-                <ul className="text-sm text-gray-700 space-y-1.5">
-                  {mode === 'login' ? (
-                    <>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
-                        Encriptación de extremo a extremo
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
-                        Sincronización automática y segura
-                      </li>
-                    </>
-                  ) : (
-                    <>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
-                        Datos protegidos con encriptación
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-[#728c6a] flex-shrink-0" />
-                        Acceso multiplataforma
-                      </li>
-                    </>
-                  )}
-                </ul>
-              </div>
+              <span className="font-extrabold text-sm text-[#1F4834]">
+                {mode === 'login' ? 'Acceso Seguro' : 'Protección Total'}
+              </span>
             </div>
+            <ul className="text-xs text-[#3E6A56] font-semibold space-y-1.5 pl-1">
+              {mode === 'login' ? (
+                <>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D5B] flex-shrink-0" />
+                    Encriptación de extremo a extremo
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D5B] flex-shrink-0" />
+                    Sincronización automática y segura
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D5B] flex-shrink-0" />
+                    Datos protegidos con encriptación
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-3.5 h-3.5 text-[#2E7D5B] flex-shrink-0" />
+                    Acceso multiplataforma
+                  </li>
+                </>
+              )}
+            </ul>
           </div>
 
           {mode === 'signup' && (
-            <p className="text-xs text-gray-600 text-center mt-4">
+            <p className="text-xs text-[#B7AB9C] text-center mt-4 leading-relaxed">
               Al crear una cuenta, aceptas nuestros{' '}
               <button
                 type="button"
                 onClick={() => navigate('/terms-and-conditions')}
-                className="text-[#728c6a] hover:underline font-medium"
+                className="text-[#E2610F] hover:underline font-bold"
               >
                 Términos y Condiciones
               </button>
@@ -306,13 +296,14 @@ const LoginScreen: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigate('/privacy-policy')}
-                className="text-[#728c6a] hover:underline font-medium"
+                className="text-[#E2610F] hover:underline font-bold"
               >
                 Aviso de Privacidad
               </button>
             </p>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

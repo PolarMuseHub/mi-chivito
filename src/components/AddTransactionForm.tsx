@@ -112,8 +112,8 @@ const AddTransactionForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Nuevo Registro</h2>
+    <div className="bg-white rounded-2xl shadow-sm p-6 border border-cream-200">
+      <h2 className="text-2xl font-bold font-['Fraunces'] text-ink mb-6">Nuevo Registro</h2>
 
       <TicketScanner onDataExtracted={handleTicketDataExtracted} />
 
@@ -122,10 +122,10 @@ const AddTransactionForm: React.FC = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-sm ${
               activeTab === tab.id
-                ? 'bg-sage-500 text-white'
-                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                ? 'bg-orange-dark text-white'
+                : 'bg-cream-100 text-ink/60 hover:bg-cream-200'
             }`}
           >
             {tab.label}
@@ -145,7 +145,7 @@ const AddTransactionForm: React.FC = () => {
             step="0.01"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg bg-cream-50 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+            className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-cream-50 focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
             placeholder="0.00"
             required
           />
@@ -162,7 +162,7 @@ const AddTransactionForm: React.FC = () => {
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="w-full pl-10 pr-4 p-3 border border-gray-300 rounded-lg bg-cream-50 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+              className="w-full pl-10 pr-4 py-3 border border-cream-200 rounded-2xl bg-cream-50 focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
               required
             />
           </div>
@@ -192,7 +192,7 @@ const AddTransactionForm: React.FC = () => {
                 id="recurrenceInterval"
                 value={recurrenceInterval}
                 onChange={(e) => setRecurrenceInterval(e.target.value as RecurrenceInterval)}
-                className="w-full p-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-white focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
               >
                 <option value="weekly">Semanal (cada 7 días)</option>
                 <option value="biweekly">Catorcenal (cada 14 días)</option>
@@ -216,7 +216,7 @@ const AddTransactionForm: React.FC = () => {
                 id="mainCategory"
                 value={mainCategory}
                 onChange={(e) => setMainCategory(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg bg-cream-50 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-cream-50 focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
                 required
               >
                 {expenseCategories.map((cat) => (
@@ -235,7 +235,7 @@ const AddTransactionForm: React.FC = () => {
                 id="subcategory"
                 value={subcategoryId}
                 onChange={(e) => setSubcategoryId(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg bg-cream-50 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+                className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-cream-50 focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
                 required
               >
                 {availableSubcategories.map((subcat) => (
@@ -260,7 +260,7 @@ const AddTransactionForm: React.FC = () => {
                   id="frequency"
                   value={frequency}
                   onChange={(e) => setFrequency(e.target.value as ExpenseFrequency)}
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-cream-50 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-cream-50 focus:ring-4 focus:ring-orange-light focus:border-transparent outline-none transition-all"
                   required
                 >
                   {frequencyOptions.map((freq) => (
@@ -279,7 +279,7 @@ const AddTransactionForm: React.FC = () => {
                   id="tipo"
                   type="text"
                   value={availableSubcategories.find(s => s.id === subcategoryId)?.type || ''}
-                  className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-cream-200 rounded-2xl bg-gray-100 text-gray-600 cursor-not-allowed"
                   disabled
                   readOnly
                 />
@@ -291,9 +291,7 @@ const AddTransactionForm: React.FC = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-all ${
-            isSubmitting ? 'opacity-70' : 'hover:opacity-90'
-          } bg-sage-500 hover:bg-sage-600`}
+          className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-[15px] py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] bg-gradient-to-b from-[#FF8A42] to-[#E2610F]"
         >
           {isSubmitting ? 'Guardando...' : 'Guardar'}
         </button>

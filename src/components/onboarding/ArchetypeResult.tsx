@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import type { Archetype } from '../../utils/archetypeEngine';
 
 interface ArchetypeResultProps {
@@ -8,38 +9,38 @@ interface ArchetypeResultProps {
 
 const ArchetypeResult: React.FC<ArchetypeResultProps> = ({ archetype, onContinue }) => {
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-between p-6 animate-fade-in"
-      style={{ backgroundColor: `${archetype.color}0D` }}
-    >
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-sm">
+    <div className="min-h-screen bg-[#FFF8F2] flex items-center justify-center p-4 sm:p-6 animate-fade-in">
+      <div className="max-w-sm w-full bg-white rounded-[28px] border border-[#F1E4D7] p-8 sm:p-9 shadow-sm flex flex-col items-center text-center">
+        {/* Archetype Icon */}
         <div
           data-key={archetype.imageKey}
-          className="w-56 h-56 rounded-3xl flex items-center justify-center mb-8"
-          style={{ backgroundColor: `${archetype.color}33` }}
+          className="w-[150px] h-[150px] rounded-[28px] bg-white border border-[#F1E4D7] flex items-center justify-center mb-6 shadow-[0_20px_40px_-20px_rgba(48,28,10,0.25)]"
         >
-          <span className="text-[64px] leading-none">🐐</span>
+          <span className="text-[64px] select-none leading-none">🐐</span>
         </div>
 
-        <h1 className="text-2xl font-bold text-sage-900 text-center">
+        {/* Title */}
+        <h1 className="font-['Fraunces',serif] font-bold text-[25px] text-[#241B14] leading-[1.25] mb-2">
           {archetype.name}
         </h1>
 
-        <p className="text-base text-gray-600 text-center italic mt-2">
+        {/* Kicker */}
+        <div className="text-[13px] font-bold text-orange-dark italic mb-3.5">
           {archetype.headline}
-        </p>
+        </div>
 
-        <p className="text-sm text-gray-700 text-center max-w-xs mx-auto mt-4 leading-relaxed">
+        {/* Description */}
+        <p className="text-[13.5px] text-[#8A7F72] font-medium leading-[1.6] max-w-[280px] mx-auto mb-7">
           {archetype.message}
         </p>
-      </div>
 
-      <div className="w-full max-w-sm pb-4 pt-8">
+        {/* CTA Button */}
         <button
           onClick={onContinue}
-          className="w-full bg-[#718c69] text-white rounded-full py-3 font-medium text-base transition-all hover:brightness-110 active:scale-[0.98]"
+          className="w-full border-none rounded-[14px] py-4 px-6 bg-gradient-to-b from-[#FF8A42] to-[#E2610F] text-white font-extrabold text-[15px] flex items-center justify-center gap-2 shadow-[0_14px_24px_-10px_rgba(226,97,15,0.65)] hover:opacity-95 transform hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer"
         >
-          ¡Ese soy yo! Seguir →
+          <span>¡Ese soy yo! Seguir</span>
+          <ArrowRight className="w-[18px] h-[18px] stroke-[2.4]" />
         </button>
       </div>
     </div>

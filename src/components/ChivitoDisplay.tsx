@@ -29,17 +29,17 @@ export const ChivitoDisplay: React.FC = () => {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 mb-6 border border-cream-200">
-      <div className="flex items-center gap-5">
+    <div className="bg-white rounded-2xl shadow-sm p-4 mb-4 border border-orange-dark/20">
+      <div className="flex items-center gap-4">
         <div
-          className="w-20 h-20 rounded-full flex items-center justify-center shadow-sm"
+          className="w-16 h-16 rounded-full flex items-center justify-center shadow-sm flex-shrink-0"
           style={{ backgroundColor: archetypeColor ? `${archetypeColor}33` : '#f5f0eb' }}
         >
-          <span className="text-5xl">🐐</span>
+          <span className="text-4xl">🐐</span>
         </div>
         <div>
-          <h2 className="text-3xl font-bold text-sage-900">{chivitoName}</h2>
-          <p className="text-base text-sage-600 mt-1">Tu coach financiero personal</p>
+          <h2 className="text-xl font-bold font-['Fraunces'] text-ink">{chivitoName}</h2>
+          <p className="text-sm text-body font-semibold mt-0.5">Tu coach financiero personal</p>
         </div>
       </div>
     </div>

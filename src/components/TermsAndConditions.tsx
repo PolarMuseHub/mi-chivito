@@ -6,17 +6,17 @@ const TermsAndConditions: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#fcf3e5] via-[#fef7ed] to-[#bed4cf]/20">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="min-h-screen bg-[#EFE7DD] p-4 sm:p-6 md:p-8">
+      <div className="max-w-4xl mx-auto">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-[#728c6a] hover:text-[#5a7054] transition-colors mb-6 font-medium"
+          className="flex items-center gap-2 text-[#728c6a] hover:text-[#5a7054] transition-colors mb-4 font-bold"
         >
           <ArrowLeft className="w-5 h-5" />
           Volver
         </button>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#bed4cf]/20">
+        <div className="bg-white rounded-[44px] shadow-2xl p-6 sm:p-8 md:p-10">
           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
             <div className="p-3 bg-[#728c6a]/10 rounded-xl">
               <FileText className="w-8 h-8 text-[#728c6a]" />

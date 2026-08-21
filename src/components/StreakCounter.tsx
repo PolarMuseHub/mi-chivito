@@ -22,19 +22,19 @@ export const StreakCounter: React.FC<StreakCounterProps> = ({ streak, longestStr
   const isActive = streak > 0;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 border-2 border-gray-100">
+    <div className="bg-white rounded-2xl shadow-sm p-4 border border-orange-dark/20">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div
-            className={`flex items-center gap-3 transition-transform ${
+            className={`flex items-center gap-4 transition-transform ${
               isAnimating ? 'animate-bounce-scale' : ''
             }`}
           >
             {isActive ? (
               <Flame
                 size={32}
-                className="text-orange-500"
-                fill="#FF6B35"
+                className="text-orange-dark"
+                fill="currentColor"
                 strokeWidth={1.5}
               />
             ) : (
@@ -47,13 +47,13 @@ export const StreakCounter: React.FC<StreakCounterProps> = ({ streak, longestStr
             <div>
               <div className="flex items-baseline gap-2">
                 <span
-                  className={`text-3xl font-bold ${
-                    isActive ? 'text-orange-500' : 'text-gray-300'
+                  className={`text-2xl font-bold font-['Fraunces'] ${
+                    isActive ? 'text-orange-dark' : 'text-gray-300'
                   }`}
                 >
                   {streak}
                 </span>
-                <span className="text-base text-gray-600">
+                <span className="text-sm text-body font-semibold">
                   {streak === 1 ? 'día seguido' : 'días seguidos'}
                 </span>
               </div>
@@ -72,10 +72,10 @@ export const StreakCounter: React.FC<StreakCounterProps> = ({ streak, longestStr
         </div>
 
         {longestStreak !== undefined && longestStreak > 0 && (
-          <div className="text-right">
-            <p className="text-sm text-gray-500">Récord personal</p>
+          <div className="text-right flex-shrink-0">
+            <p className="text-xs text-body font-semibold">Récord</p>
             <div className="flex items-center gap-2 justify-end mt-1">
-              <Flame size={16} className="text-amber-500" fill="#F59E0B" />
+              <Flame size={14} className="text-amber-500" fill="#F59E0B" />
               <span className="text-xl font-bold text-amber-600">
                 {longestStreak}
               </span>

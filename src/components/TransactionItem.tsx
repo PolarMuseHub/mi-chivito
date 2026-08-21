@@ -23,89 +23,105 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
     return new Intl.DateTimeFormat('es-419', {
       day: '2-digit',
       month: '2-digit',
-      year: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-    }).format(date);
+      year: 'numeric',
+    }).format(new Date(date));
   };
 
   const getTypeStyles = () => {
     switch (transaction.type) {
       case 'ingreso':
-        return { icon: '💰', bgColor: 'bg-sage-100', textColor: 'text-gray-800' };
+        return {
+          icon: '💰',
+          bgColor: 'bg-[#E8F3EC]',
+          textColor: 'text-[#2E7D5B]',
+          amountPrefix: '+',
+        };
       case 'gasto': {
         const category = transaction.category ? getCategoryById(transaction.category) : undefined;
         const subcategory = transaction.subcategoryId ? getSubcategoryById(transaction.subcategoryId) : undefined;
         const displayLabel = subcategory
-          ? `${category?.name || ''} - ${subcategory.subcategory}`
+          ? `${category?.name || ''} · ${subcategory.subcategory}`
           : category?.name;
         return {
           icon: category?.icon || '🛒',
-          bgColor: 'bg-coral-100',
-          textColor: 'text-gray-800',
+          bgColor: 'bg-[#FDECE9]',
+          textColor: 'text-[#E2523D]',
+          amountPrefix: '-',
           label: displayLabel,
-          subcategory: subcategory
+          subcategory: subcategory,
         };
       }
       case 'deuda':
-        return { icon: '📝', bgColor: 'bg-cream-200', textColor: 'text-gray-800' };
+        return {
+          icon: '📝',
+          bgColor: 'bg-[#FBF2E1]',
+          textColor: 'text-[#C98A1E]',
+          amountPrefix: '-',
+        };
       case 'ahorro':
-        return { icon: '🏦', bgColor: 'bg-sage-100', textColor: 'text-gray-800' };
+        return {
+          icon: '🏦',
+          bgColor: 'bg-[#FFF1E4]',
+          textColor: 'text-orange-dark',
+          amountPrefix: '+',
+        };
       default:
-        return { icon: '💲', bgColor: 'bg-cream-100', textColor: 'text-gray-800' };
+        return {
+          icon: '💲',
+          bgColor: 'bg-[#FBF6F0]',
+          textColor: 'text-[#241B14]',
+          amountPrefix: '',
+        };
     }
   };
 
   const typeStyles = getTypeStyles();
 
   return (
-    <div className="bg-cream-50 rounded-lg p-4 flex items-center justify-between transition-all hover:bg-cream-100 border border-cream-200">
-      <div className="flex items-center space-x-4">
-        <div className={`${typeStyles.bgColor} p-3 rounded-full`}>
-          <span className="text-xl">{typeStyles.icon}</span>
+    <div className="bg-white rounded-[16px] p-3.5 flex items-center justify-between border border-[#F1E4D7] shadow-sm hover:border-orange/40 transition-all group">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className={`${typeStyles.bgColor} w-11 h-11 rounded-[13px] flex items-center justify-center flex-shrink-0 text-xl`}>
+          <span>{typeStyles.icon}</span>
         </div>
 
-        <div>
-          <div className="flex items-center gap-2">
-            <p className="font-medium capitalize text-gray-800">{transaction.type}</p>
+        <div className="min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <p className="font-bold text-[13.5px] text-[#241B14] truncate capitalize">
+              {typeStyles.label || transaction.type}
+            </p>
             {transaction.is_recurring && !transaction.parent_transaction_id && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-sage-100 text-sage-700">
-                <RefreshCw size={12} />
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-[#FBF2E1] text-[#C98A1E]">
+                <RefreshCw size={10} />
                 {transaction.recurrence_interval === 'weekly' ? 'Semanal' :
                  transaction.recurrence_interval === 'biweekly' ? 'Catorcenal' :
                  transaction.recurrence_interval === 'bimonthly' ? 'Quincenal' : 'Mensual'}
               </span>
             )}
             {transaction.parent_transaction_id && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                <RefreshCw size={12} />
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-gray-100 text-gray-600">
+                <RefreshCw size={10} />
                 Auto
               </span>
             )}
           </div>
-          {typeStyles.label && (
-            <p className="text-sm text-gray-600">{typeStyles.label}</p>
-          )}
-          {typeStyles.subcategory && (
-            <p className="text-xs text-gray-500">
-              {typeStyles.subcategory.type} • {typeStyles.subcategory.frequency}
-            </p>
-          )}
-          <p className="text-xs text-gray-500">{formatDate(transaction.date)}</p>
+          <p className="text-[11px] font-medium text-[#8A7F72] mt-0.5">
+            {formatDate(transaction.date)}
+          </p>
         </div>
       </div>
 
-      <div className="flex items-center space-x-3">
-        <p className={`font-bold ${typeStyles.textColor}`}>
-          {formatCurrency(transaction.amount)}
+      <div className="flex items-center gap-2 flex-shrink-0 ml-3">
+        <p className={`font-['Fraunces',serif] font-bold text-[15px] ${typeStyles.textColor}`}>
+          {typeStyles.amountPrefix} {formatCurrency(transaction.amount)}
         </p>
 
         <button
           onClick={() => deleteTransaction(transaction.id)}
-          className="p-1.5 rounded-full hover:bg-coral-200 transition-colors"
+          className="p-1.5 rounded-lg text-gray-400 hover:text-[#E2523D] hover:bg-[#FDECE9] transition-colors cursor-pointer"
           aria-label="Eliminar"
+          title="Eliminar transacción"
         >
-          <Trash2 size={18} className="text-gray-500 hover:text-coral-600 transition-colors" />
+          <Trash2 size={16} />
         </button>
       </div>
     </div>

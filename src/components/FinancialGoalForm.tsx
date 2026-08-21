@@ -1,11 +1,86 @@
 import React, { useState } from 'react';
-import { Target, Check } from 'lucide-react';
+import { Target, Calendar } from 'lucide-react';
 import { GoalType } from '../types';
-import { createFinancialGoal, GOAL_TYPES } from '../utils/goals';
+import { createFinancialGoal } from '../utils/goals';
 
 interface FinancialGoalFormProps {
   onSuccess?: () => void;
 }
+
+const GOAL_OPTIONS: {
+  value: GoalType;
+  label: string;
+  iconColorClass: string;
+  icon: React.ReactNode;
+}[] = [
+  {
+    value: 'Compra',
+    label: 'Compra',
+    iconColorClass: 'bg-[#E9EFFC] text-[#3B6FE0]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M6 2l1.5 3M18 2l-1.5 3" />
+        <path d="M4 8h16l-1.2 11a2 2 0 01-2 1.8H7.2a2 2 0 01-2-1.8L4 8z" />
+      </svg>
+    ),
+  },
+  {
+    value: 'Viaje',
+    label: 'Viaje',
+    iconColorClass: 'bg-[#F0ECFB] text-[#7C5CD6]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M10 21l1-7-8-2 18-9-6 18-3-6-6 6z" />
+      </svg>
+    ),
+  },
+  {
+    value: 'Deuda',
+    label: 'Deuda',
+    iconColorClass: 'bg-[#FBF2E1] text-[#C98A1E]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <rect x="2" y="6" width="20" height="13" rx="2.5" />
+        <path d="M2 10h20" />
+      </svg>
+    ),
+  },
+  {
+    value: 'Vehículo',
+    label: 'Vehículo',
+    iconColorClass: 'bg-[#FDECE9] text-[#E2523D]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 13l2-6h14l2 6M5 13h14v5H5z" />
+        <circle cx="7.5" cy="18" r="1.4" />
+        <circle cx="16.5" cy="18" r="1.4" />
+      </svg>
+    ),
+  },
+  {
+    value: 'Emergencias',
+    label: 'Emergencias',
+    iconColorClass: 'bg-[#F0ECFB] text-[#7C5CD6]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M12 3l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V6l8-3z" />
+        <path d="M12 8v6M9 11h6" />
+      </svg>
+    ),
+  },
+  {
+    value: 'Otra',
+    label: 'Otra',
+    iconColorClass: 'bg-[#FBEAF1] text-[#D6467E]',
+    icon: (
+      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <circle cx="12" cy="12" r="8" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="12" cy="12" r="1" />
+      </svg>
+    ),
+  },
+];
 
 const FinancialGoalForm: React.FC<FinancialGoalFormProps> = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -78,133 +153,154 @@ const FinancialGoalForm: React.FC<FinancialGoalFormProps> = ({ onSuccess }) => {
 
   if (showSuccess) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto">
-            <Check size={40} className="text-emerald-600" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-2">Meta creada</h2>
-            <p className="text-lg text-gray-600">
-              Tu Chivito ya tiene algo que proteger 🐐
-            </p>
-          </div>
+      <div className="min-h-[50vh] flex items-center justify-center p-4">
+        <div className="bg-white border border-[#F1E4D7] rounded-[22px] p-8 text-center max-w-sm w-full shadow-xl shadow-black/10 animate-fade-in">
+          <span className="text-5xl mb-3 block">🎉</span>
+          <h3 className="font-['Fraunces',serif] text-[20px] font-bold text-[#241B14] mb-2">
+            ¡Tu meta está lista!
+          </h3>
+          <p className="text-[12.5px] text-[#8A7F72] font-medium mb-6 leading-relaxed">
+            Cada peso que registres ahora suma directo a "{formData.goal_name || 'tu meta'}".
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              if (onSuccess) onSuccess();
+            }}
+            className="w-full py-3.5 px-4 rounded-xl bg-orange text-white font-extrabold text-[13.5px] hover:bg-orange-dark transition-colors shadow-md shadow-orange/20 cursor-pointer"
+          >
+            Ver mi meta
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-sm border border-cream-200 p-8">
-        <div className="mb-8 text-center">
-          <div className="w-16 h-16 bg-sage-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Target size={32} className="text-sage-600" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            ¿Para qué quieres que trabaje tu Chivito?
-          </h1>
-          <p className="text-gray-600">
-            No tiene que ser perfecto. Solo algo que valga la pena cuidar.
-          </p>
+    <div className="max-w-md mx-auto">
+      <div className="bg-white rounded-[18px] p-6 border border-[#F1E4D7] shadow-sm text-center">
+        <div className="w-16 h-16 rounded-full bg-[#E8F3EC] text-[#2E7D5B] flex items-center justify-center mx-auto mb-4">
+          <svg className="w-[30px] h-[30px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="8" />
+            <circle cx="12" cy="12" r="4.5" />
+            <circle cx="12" cy="12" r="1" />
+          </svg>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Nombre de tu meta <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={formData.goal_name}
-              onChange={(e) => setFormData({ ...formData, goal_name: e.target.value })}
-              placeholder="Ej. Cambiar mi celular · Viajar · Pagar una deuda · Comprar un carro"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-transparent outline-none transition-all"
-              maxLength={100}
-            />
-          </div>
+        <h2 className="font-['Fraunces',serif] font-bold text-[23px] text-[#241B14] leading-tight mb-2">
+          ¿Para qué quieres que trabaje tu Chivito?
+        </h2>
+        <p className="text-[13px] text-[#8A7F72] font-medium mb-6 leading-relaxed max-w-[270px] mx-auto">
+          No tiene que ser perfecto. Solo algo que valga la pena cuidar.
+        </p>
 
+        <form onSubmit={handleSubmit} className="text-left space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
-              ¿Para qué es esta meta? <span className="text-red-500">*</span>
+            <label className="flex items-center gap-1 text-[12.5px] font-bold text-[#241B14] mb-2">
+              Nombre de tu meta <span className="text-[#E2523D]">*</span>
             </label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {GOAL_TYPES.map((type) => (
-                <button
-                  key={type.value}
-                  type="button"
-                  onClick={() => setFormData({ ...formData, goal_type: type.value })}
-                  className={`
-                    px-4 py-3 rounded-lg border-2 transition-all
-                    flex items-center justify-center gap-2 text-sm font-medium
-                    ${
-                      formData.goal_type === type.value
-                        ? 'border-sage-500 bg-sage-50 text-sage-700'
-                        : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'
-                    }
-                  `}
-                >
-                  <span className="text-xl">{type.icon}</span>
-                  <span>{type.label}</span>
-                </button>
-              ))}
+            <div className="input-wrap">
+              <input
+                type="text"
+                value={formData.goal_name}
+                onChange={(e) => setFormData({ ...formData, goal_name: e.target.value })}
+                placeholder="Ej. Cambiar mi celular · Viajar · Pagar"
+                className="w-full text-sm font-semibold text-[#241B14] placeholder-[#C4B9AA]"
+                maxLength={100}
+              />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              ¿Cuánto dinero necesitas en total? <span className="text-red-500">*</span>
+            <label className="flex items-center gap-1 text-[12.5px] font-bold text-[#241B14] mb-2">
+              ¿Para qué es esta meta? <span className="text-[#E2523D]">*</span>
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                $
-              </span>
+            <div className="grid grid-cols-2 gap-2.5">
+              {GOAL_OPTIONS.map((type) => {
+                const isSelected = formData.goal_type === type.value;
+                return (
+                  <button
+                    key={type.value}
+                    type="button"
+                    onClick={() => setFormData({ ...formData, goal_type: type.value })}
+                    className={`
+                      flex items-center gap-2.5 border-[1.5px] rounded-[13px] p-3 text-left transition-all cursor-pointer
+                      ${
+                        isSelected
+                          ? 'border-orange bg-[#FFF1E4]'
+                          : 'border-[#F1E4D7] bg-white hover:bg-[#FBF6F0]'
+                      }
+                    `}
+                  >
+                    <div className={`w-[30px] h-[30px] rounded-[9px] flex items-center justify-center flex-shrink-0 ${type.iconColorClass}`}>
+                      {type.icon}
+                    </div>
+                    <span className="text-[12.5px] font-bold text-[#241B14]">
+                      {type.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <label className="flex items-center gap-1 text-[12.5px] font-bold text-[#241B14] mb-2">
+              ¿Cuánto dinero necesitas en total? <span className="text-[#E2523D]">*</span>
+            </label>
+            <div className="input-wrap">
+              <span className="text-[17px] font-extrabold text-orange-dark mr-1">$</span>
               <input
                 type="number"
                 value={formData.target_amount}
                 onChange={(e) => setFormData({ ...formData, target_amount: e.target.value })}
                 placeholder="Ej. 12000"
-                className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-transparent outline-none transition-all"
+                className="w-full text-sm font-semibold text-[#241B14] placeholder-[#C4B9AA]"
                 min="0"
                 step="0.01"
               />
             </div>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-[11px] text-[#8A7F72] font-semibold mt-1.5">
               Puedes cambiar este monto después.
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-[12.5px] font-bold text-[#241B14] mb-2">
               ¿Para cuándo te gustaría lograrlo?
             </label>
-            <input
-              type="date"
-              value={formData.target_date}
-              onChange={(e) => setFormData({ ...formData, target_date: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-transparent outline-none transition-all"
-              min={new Date().toISOString().split('T')[0]}
-            />
-            <p className="text-sm text-gray-500 mt-1">Opcional</p>
+            <div className="input-wrap">
+              <Calendar className="w-4 h-4 text-[#B7AB9C] flex-shrink-0" />
+              <input
+                type="date"
+                value={formData.target_date}
+                onChange={(e) => setFormData({ ...formData, target_date: e.target.value })}
+                className="w-full text-sm font-semibold text-[#241B14] placeholder-[#C4B9AA]"
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+            <p className="text-[11px] text-[#8A7F72] font-semibold mt-1.5">Opcional</p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-[12.5px] font-bold text-[#241B14] mb-2">
               ¿Por qué es importante para ti?
             </label>
-            <textarea
-              value={formData.goal_reason}
-              onChange={(e) => setFormData({ ...formData, goal_reason: e.target.value })}
-              placeholder="Ej. Para viajar sin preocuparme por dinero."
-              rows={4}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sage-500 focus:border-transparent outline-none transition-all resize-none"
-              maxLength={500}
-            />
-            <p className="text-sm text-gray-500 mt-1">Opcional</p>
+            <div className="input-wrap !items-start">
+              <textarea
+                value={formData.goal_reason}
+                onChange={(e) => setFormData({ ...formData, goal_reason: e.target.value })}
+                placeholder="Ej. Para viajar sin preocuparme por dinero."
+                rows={3}
+                className="w-full text-sm font-medium text-[#241B14] placeholder-[#C4B9AA] resize-none leading-relaxed"
+                maxLength={500}
+              />
+            </div>
+            <p className="text-[11px] text-[#8A7F72] font-semibold mt-1.5">Opcional</p>
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+            <div className="bg-[#FDECE9] border border-[#FBD1C9] text-[#E2523D] text-sm font-medium px-4 py-3 rounded-xl">
               {error}
             </div>
           )}
@@ -212,17 +308,17 @@ const FinancialGoalForm: React.FC<FinancialGoalFormProps> = ({ onSuccess }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-sage-600 hover:bg-sage-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full disabled:opacity-50 disabled:cursor-not-allowed text-white font-extrabold text-[15px] py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-orange/30 hover:shadow-xl transform hover:scale-[1.01] active:scale-[0.99] bg-gradient-to-b from-[#FF8A42] to-[#E2610F] mt-6 cursor-pointer"
           >
             {isSubmitting ? (
               <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Creando tu meta...
+                <span>Creando tu meta...</span>
               </>
             ) : (
               <>
-                <Target size={20} />
-                Crear mi meta
+                <Target size={18} />
+                <span>Crear mi meta</span>
               </>
             )}
           </button>

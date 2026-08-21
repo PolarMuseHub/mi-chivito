@@ -43,6 +43,18 @@ export default {
           800: '#A53424',
           900: '#872B20',
         },
+        orange: {
+          light: '#FFDABF', // Para el efecto de anillo (ring)
+          DEFAULT: '#FF7A2E', // El naranja principal
+          dark: '#E2610F',
+          50: '#FFF3E0',
+          100: '#FFE0B2',
+          200: '#FFCC80',
+          300: '#FFB74D',
+          400: '#FFA726',
+          500: '#FF9800',
+          600: '#FB8C00',
+        },
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
